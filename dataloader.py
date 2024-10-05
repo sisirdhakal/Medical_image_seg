@@ -1,4 +1,3 @@
-import torch
 import os
 import cv2
 from PIL import Image
@@ -8,6 +7,19 @@ from torchvision.transforms import v2, ToTensor
 
 
 class BuildingsDataset(Dataset):
+    """
+    Custom dataset class for loading images and their corresponding masks.
+
+    # Arguments
+        images_dir: Directory containing the images.
+        masks_dir: Directory containing the masks.
+        class_rgb_values: Optional mapping of RGB values to class indices.
+        augmentation: Optional transformations to apply to images and masks.
+        preprocessing: Optional preprocessing steps to apply to images and masks.
+
+    Returns the image and mask
+    """
+
     def __init__(
         self,
         images_dir,
@@ -67,6 +79,24 @@ def get_dataset(
     img_height,
     img_width,
 ):
+    """
+    Create data loaders for training and validation datasets.
+
+    # Arguments
+        train_img_dir: Directory for training images.
+        train_mask_dir: Directory for training masks.
+        val_img_dir: Directory for validation images.
+        val_mask_dir: Directory for validation masks.
+        pin_memory: Whether to pin memory in DataLoader. # efficient and faster when using gpu/cuda to train the model
+        batch_size: Number of samples per batch.
+        num_workers: Number of subprocesses to use for data loading.
+        img_height: Height to resize images to.
+        img_width: Width to resize images to.
+
+    # Returns
+        train_loader: DataLoader for training dataset.
+        val_loader: DataLoader for validation dataset.
+    """
 
     train_transform = v2.Compose(
         [

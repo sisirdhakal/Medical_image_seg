@@ -29,7 +29,7 @@ def one_hot_encode(label, label_values):
         label_values
 
     # Returns
-        A 2D array with the same width and hieght as the input, but
+        A 2D array with the same width and height as the input, but
         with a depth size of num_classes
     """
     semantic_map = []
